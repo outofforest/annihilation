@@ -72,7 +72,7 @@ func TestOneAppNoArguments(t *testing.T) {
 	group.Exit(nil)
 	require.NoError(t, group.Wait())
 
-	require.Equal(t, []string{app1}, shouldRun(t, app1Ch))
+	require.Empty(t, shouldRun(t, app1Ch))
 	shouldNotRun(t, app2Ch)
 }
 
@@ -90,8 +90,8 @@ func TestTwoAppsNoArguments(t *testing.T) {
 	group.Exit(nil)
 	require.NoError(t, group.Wait())
 
-	require.Equal(t, []string{app1}, shouldRun(t, app1Ch))
-	require.Equal(t, []string{app2}, shouldRun(t, app2Ch))
+	require.Empty(t, shouldRun(t, app1Ch))
+	require.Empty(t, shouldRun(t, app2Ch))
 }
 
 func TestTwoAppsWithArguments(t *testing.T) {
@@ -116,12 +116,10 @@ func TestTwoAppsWithArguments(t *testing.T) {
 	require.NoError(t, group.Wait())
 
 	require.Equal(t, []string{
-		app1,
 		"--app1-arg1", "app1-value1",
 		"--app1-arg2", "app1-value2",
 	}, shouldRun(t, app1Ch))
 	require.Equal(t, []string{
-		app2,
 		"--app2-arg1", "app2-value1",
 		"--app2-arg2", "app2-value2",
 	}, shouldRun(t, app2Ch))
@@ -154,12 +152,10 @@ func TestTwoAppsWithArgumentsAndBoxArguments(t *testing.T) {
 	require.NoError(t, group.Wait())
 
 	require.Equal(t, []string{
-		app1,
 		"--app1-arg1", "app1-value1",
 		"--app1-arg2", "app1-value2",
 	}, shouldRun(t, app1Ch))
 	require.Equal(t, []string{
-		app2,
 		"--app2-arg1", "app2-value1",
 		"--app2-arg2", "app2-value2",
 	}, shouldRun(t, app2Ch))

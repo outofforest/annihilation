@@ -30,6 +30,7 @@ func Run(apps Apps, args ...string) ([]string, parallel.Task, error) {
 				Name: arg,
 				Func: appFunc,
 			}
+			continue
 		}
 		info.Args = append(info.Args, arg)
 	}
